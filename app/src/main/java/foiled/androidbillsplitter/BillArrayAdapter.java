@@ -22,7 +22,7 @@ public class BillArrayAdapter extends ArrayAdapter {
     @Override
     public Object getItem(int position) {
         String bill = mBills.get(position);
-        return String.format("%s \nServes great: %s", bill);
+        return String.format(bill);
     }
     @Override
     public int getCount() {
