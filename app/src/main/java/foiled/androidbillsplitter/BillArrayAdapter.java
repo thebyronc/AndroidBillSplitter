@@ -19,7 +19,11 @@ public class BillArrayAdapter extends ArrayAdapter {
         this.mContext = mContext;
         this.mBills = mBills;
     }
-
+    @Override
+    public Object getItem(int position) {
+        String bill = mBills.get(position);
+        return String.format("%s \nServes great: %s", bill);
+    }
     @Override
     public int getCount() {
         return mBills.size();
