@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Foiled Bill</string>
+    <string name="app_name">Bill Foil</string>
     <string name="title_activity_bill">BillActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
