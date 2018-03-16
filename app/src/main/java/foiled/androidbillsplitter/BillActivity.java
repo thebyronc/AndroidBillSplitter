@@ -24,8 +24,10 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import android.graphics.Typeface;
 
 public class BillActivity extends Activity {
+    @BindView(R.id.billTitleTextView) TextView mBillTitleTextView;
     @BindView(R.id.billListView) ListView mBillListView;
 
     @Override
@@ -35,6 +37,9 @@ public class BillActivity extends Activity {
         ButterKnife.bind(this);
 
         mBillListView = (ListView) findViewById(R.id.billListView);
+
+        Typeface bebasNeueBold = Typeface.createFromAsset(getAssets(), "fonts/BebasNeue Bold.ttf");
+        mBillTitleTextView.setTypeface(bebasNeueBold);
 
         Intent intent = getIntent();
         ArrayList<String> bills = intent.getStringArrayListExtra("bills");
