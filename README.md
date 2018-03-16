@@ -3,16 +3,37 @@ This application is built for a Epicodus project.
 
 Application will allow you to add restaurant receipts and split the items by costs, display all guests that participated in the bill.
 
+Note that the application is still in development.
+
+## Getting Started
+To get this application running.
+
+Software Required:
+[Android Studio 3.0.1](https://developer.android.com/studio/index.html)
+
+1. Clone this repository to your local machine.
+```
+$ git clone https://github.com/thebyronc/AndroidBillSplitter
+```
+2. Open project *AndroidBillSplitter* with **Android Studio**
+3. Click on **AVD Manager** in **Android Studio** ![AVD Manager](images/rm_1.png)
+
+4. Run a Virtual Device with an **API** of **24** or higher. ![Run Virtual Device](images/rm_2.png)
+
+5. Once Virtual Device is running, click **Run App**. ![Run App](images/rm_3.png)
+
+6. App will run on **Virtual Device**
+
 ## Current Status
 This is still a work in progress. See Application Dev Plan
 
-### Application Research
+#### Application Research
 - [Google OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2) -Unique sign in for google drive
 - [Google Sheets API](https://developers.google.com/sheets/api/) - Researching how to output information into google sheets and a personal record keeper.
 - [Free OCR](http://www.free-ocr.com/) - Research how to parse text from images
 - [Ocrad.js](http://antimatter15.com/ocrad.js/demo.html) - Possible text from image js
 
-### Application Dev Plan
+#### Application Dev Plan
 - [x] Create Baseline objects and routers.
 - [ ] Connect to Firebase for initial data creation and storage
 - [ ] Implement OAuth2
