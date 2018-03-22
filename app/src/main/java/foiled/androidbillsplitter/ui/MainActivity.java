@@ -430,7 +430,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             Log.d("Data", values.toString() );
 
             if (values != null) {
-                results.add("Name, Major");
+                results.add("Column A, Column E");
                 for (List row : values) {
                     results.add(row.get(0) + ", " + row.get(4));
                 }
