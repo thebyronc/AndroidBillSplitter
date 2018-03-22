@@ -1,22 +1,20 @@
-package foiled.androidbillsplitter;
+package foiled.androidbillsplitter.ui;
 
 import android.content.Intent;
-import android.support.design.widget.TabItem;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TabHost;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import foiled.androidbillsplitter.BillActivity;
+import foiled.androidbillsplitter.PeopleActivity;
+import foiled.androidbillsplitter.R;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.peopleButton) Button mPeopleButton;
