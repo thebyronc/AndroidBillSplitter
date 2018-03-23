@@ -1,21 +1,10 @@
-package foiled.androidbillsplitter;
+package foiled.androidbillsplitter.ui;
 
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
-import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +13,9 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import foiled.androidbillsplitter.adapter.BillArrayAdapter;
+import foiled.androidbillsplitter.R;
+
 import android.graphics.Typeface;
 
 public class BillActivity extends Activity {
@@ -42,7 +34,7 @@ public class BillActivity extends Activity {
         mBillTitleTextView.setTypeface(bebasNeueBold);
 
         Intent intent = getIntent();
-        ArrayList<String> bills = intent.getStringArrayListExtra("bills");
+        ArrayList<String> bills = intent.getStringArrayListExtra("data");
         BillArrayAdapter adapter = new BillArrayAdapter(this, android.R.layout.simple_list_item_1, bills);
         mBillListView.setAdapter(adapter);
     }

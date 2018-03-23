@@ -1,4 +1,4 @@
-package foiled.androidbillsplitter;
+package foiled.androidbillsplitter.ui;
 
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import foiled.androidbillsplitter.adapter.PeopleArrayAdapter;
+import foiled.androidbillsplitter.R;
 
 public class PeopleActivity extends AppCompatActivity {
     @BindView(R.id.peopleTitleTextView) TextView peopleTitleTextView;

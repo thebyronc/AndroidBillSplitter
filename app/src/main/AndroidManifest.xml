@@ -20,9 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PeopleActivity" android:theme="@style/Theme.Design.NoActionBar" />
+        <activity android:name=".ui.PeopleActivity" android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".BillActivity"></activity>
+            android:name=".ui.BillActivity"></activity>
     </application>
 
 </manifest>

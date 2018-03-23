@@ -1,4 +1,4 @@
-package foiled.androidbillsplitter;
+package foiled.androidbillsplitter.adapter;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;

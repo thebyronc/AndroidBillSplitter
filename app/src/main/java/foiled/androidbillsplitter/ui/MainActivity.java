@@ -31,8 +31,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import foiled.androidbillsplitter.BillActivity;
-import foiled.androidbillsplitter.PeopleActivity;
 import foiled.androidbillsplitter.R;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -449,6 +447,15 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         @Override
         protected void onPostExecute(List<String> output) {
             mProgress.hide();
+            ArrayList<String> data = new ArrayList<>();
+            for(int i = 0; i < output.size(); i++) {
+                data.add(output.get(i));
+            }
+            Intent intent = new Intent(MainActivity.this, BillActivity.class);
+            intent.putStringArrayListExtra("data", data);
+
+            startActivity(intent);
+
             if (output == null || output.size() == 0) {
                 mOutputText.setText("No results returned.");
             } else {
