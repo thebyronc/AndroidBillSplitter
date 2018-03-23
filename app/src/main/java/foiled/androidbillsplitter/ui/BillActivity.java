@@ -34,7 +34,7 @@ public class BillActivity extends Activity {
         mBillTitleTextView.setTypeface(bebasNeueBold);
 
         Intent intent = getIntent();
-        ArrayList<String> bills = intent.getStringArrayListExtra("data");
+        ArrayList<String> bills = intent.getStringArrayListExtra("bill");
         BillArrayAdapter adapter = new BillArrayAdapter(this, android.R.layout.simple_list_item_1, bills);
         mBillListView.setAdapter(adapter);
     }

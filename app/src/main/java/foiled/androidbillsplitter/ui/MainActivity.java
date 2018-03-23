@@ -419,7 +419,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
          */
         private List<String> getDataFromApi() throws IOException {
             String spreadsheetId = "1AkSh67SQ7HJpE7xnqX2d5x5ER-K2yokW93YXwq4Vz6E";
-            String range = "DataSheet1!A2:E";
+            String range = "DataSheet1!A2:C";
             List<String> results = new ArrayList<String>();
             ValueRange response = this.mService.spreadsheets().values()
                     .get(spreadsheetId, range)
@@ -428,7 +428,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             Log.d("Data", values.toString() );
 
             if (values != null) {
-                results.add("Column A, Column E");
+                results.add("Column A, Column C");
                 for (List row : values) {
                     results.add(row.get(0) + ", " + row.get(4));
                 }
@@ -452,7 +452,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 data.add(output.get(i));
             }
             Intent intent = new Intent(MainActivity.this, BillActivity.class);
-            intent.putStringArrayListExtra("data", data);
+            intent.putStringArrayListExtra("bill", data);
 
             startActivity(intent);
 
