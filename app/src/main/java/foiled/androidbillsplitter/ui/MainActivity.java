@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     @BindView(R.id.billButton) Button mBillButton;
     @BindView(R.id.addBillEditText) EditText mAddBillEditText;
     @BindView(R.id.addBillButton) Button mAddBillButton;
+    @BindView(R.id.apiCallButton) Button mApiCallButton;
 
     GoogleAccountCredential mCredential;
     private TextView mOutputText;
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
     static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
 
-    private static final String BUTTON_TEXT = "Call Google Sheets API";
+    private static final String BUTTON_TEXT = "GET DATA FROM SHEETS";
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { SheetsScopes.SPREADSHEETS_READONLY };
 
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BillActivity.class);
-                intent.putExtra("bills", bills);
+                intent.putExtra("bill", bills);
                 startActivity(intent);
             }
         });
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
         mCallApiButton = new Button(this);
         mCallApiButton.setText(BUTTON_TEXT);
-        mCallApiButton.setOnClickListener(new View.OnClickListener() {
+        mApiCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCallApiButton.setEnabled(false);
@@ -164,9 +165,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         mOutputText.setPadding(16, 16, 16, 16);
         mOutputText.setVerticalScrollBarEnabled(true);
         mOutputText.setMovementMethod(new ScrollingMovementMethod());
-        mOutputText.setText(
-                "Click the \'" + BUTTON_TEXT +"\' button to test the API.");
-        activityLayout.addView(mOutputText);
 
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Calling Google Sheets API ...");
@@ -428,9 +426,8 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             Log.d("Data", values.toString() );
 
             if (values != null) {
-                results.add("Column A, Column C");
                 for (List row : values) {
-                    results.add(row.get(0) + ", " + row.get(4));
+                    results.add("Item" + row.get(0) + " Cost: " + row.get(2));
                 }
             }
             return results;
