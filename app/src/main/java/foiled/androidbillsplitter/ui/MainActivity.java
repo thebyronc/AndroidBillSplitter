@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
         mCallApiButton = new Button(this);
         mCallApiButton.setText(BUTTON_TEXT);
-        mApiCallButton.setOnClickListener(new View.OnClickListener() {
+        mCallApiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCallApiButton.setEnabled(false);
@@ -427,7 +427,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
             if (values != null) {
                 for (List row : values) {
-                    results.add("Item" + row.get(0) + " Cost: " + row.get(2));
+                    results.add("Item: " + row.get(0) + " Cost: " + row.get(2));
                 }
             }
             return results;
