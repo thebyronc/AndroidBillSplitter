@@ -1,6 +1,9 @@
 package foiled.androidbillsplitter.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import butterknife.ButterKnife;
 import foiled.androidbillsplitter.R;
 import foiled.androidbillsplitter.models.People;
 
+
 /**
  * Created by Sheep on 3/16/2018.
  */
@@ -23,9 +27,9 @@ public class PeopleArrayAdapter extends RecyclerView.Adapter<PeopleArrayAdapter.
     private Context mContext;
     private ArrayList<People> mPeoples = new ArrayList<>();
 
-    public PeopleArrayAdapter(Context mContext, int resource, ArrayList<People> mPeoples) {
-        mContext = mContext;
-        mPeoples = mPeoples;
+    public PeopleArrayAdapter(Context context, ArrayList<People> peoples) {
+        mContext = context;
+        mPeoples = peoples;
     }
 
     @Override
@@ -45,14 +49,28 @@ public class PeopleArrayAdapter extends RecyclerView.Adapter<PeopleArrayAdapter.
         return mPeoples.size();
     }
 
-    public class PeopleViewHolder extends RecyclerView.ViewHolder {
+    public class PeopleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.peopleNameTextView) TextView mPeopleNameTextView;
         @BindView(R.id.emailTextView) TextView mEmailTextView;
+
+        private Context mContext;
+
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            People people = mPeoples.get(itemPosition);
+
+            Intent emailIntent = new Intent(Intent.ACTION_SENDTO,
+                        Uri.parse("mailto:" + people.getEmail()));
+            mContext.startActivity(emailIntent);
+
+        }
 
         public PeopleViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            itemView.setOnClickListener(this);
         }
 
         public void bindPeople(People people) {

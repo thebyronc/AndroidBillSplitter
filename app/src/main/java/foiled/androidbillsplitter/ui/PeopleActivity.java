@@ -1,6 +1,8 @@
 package foiled.androidbillsplitter.ui;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -76,10 +78,11 @@ public class PeopleActivity extends AppCompatActivity {
     }
 
     private void getPeople() {
-        mAdapter = new PeopleArrayAdapter(this, android.R.layout.simple_list_item_1, peoples);
+        mAdapter = new PeopleArrayAdapter(getApplicationContext(), peoples);
         mRecyclerView.setAdapter(mAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PeopleActivity.this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
     }
+
 }
