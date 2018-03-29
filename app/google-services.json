@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "419395613707",
+    "firebase_url": "https://billsplitter-1735f.firebaseio.com",
+    "project_id": "billsplitter-1735f",
+    "storage_bucket": "billsplitter-1735f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419395613707:android:7a4af53cf7872e13",
+        "android_client_info": {
+          "package_name": "foiled.androidbillsplitter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "419395613707-k91808qgibmpusrblavj4mkq5cn33u3h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "foiled.androidbillsplitter",
+            "certificate_hash": "778c390983067f8e44b8df4d95bfa9b107c78b02"
+          }
+        },
+        {
+          "client_id": "419395613707-h763c44clibtpc4c27a2llj7n5no4prr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ-5oyMe33spwYip59Uk2CqKWu7E0ixak"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "419395613707-h763c44clibtpc4c27a2llj7n5no4prr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
