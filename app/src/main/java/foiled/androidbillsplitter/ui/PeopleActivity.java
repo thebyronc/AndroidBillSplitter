@@ -97,7 +97,7 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
 
         mAddPeopleButton.setOnClickListener(this);
         setUpFirebaseAdapter();
-        getPeople();
+//        getPeople();
 
     }
     @Override
@@ -117,10 +117,6 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
-        DatabaseReference restaurantRef = FirebaseDatabase
-                .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_PEOPLE)
-                .child(uid);
         DatabaseReference pushRef = mPeopleFireBase.push();
         String pushId = pushRef.getKey();
         people.setPushId(pushId);
@@ -134,7 +130,11 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
     }
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mFirebaseAdapter.startListening();
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
