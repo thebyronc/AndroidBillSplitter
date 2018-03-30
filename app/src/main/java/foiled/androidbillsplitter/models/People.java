@@ -1,11 +1,14 @@
 package foiled.androidbillsplitter.models;
 
+import org.parceler.Parcel;
 
+@Parcel
 public class People {
     private String name;
     private String email;
     private String pushId;
 
+    public People() {}
     public People(String name, String email){
         this.name = name;
         this.email = email;
