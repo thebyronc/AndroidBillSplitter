@@ -2,9 +2,9 @@
 <resources>
     <color name="colorPrimary">#494949</color>
     <color name="colorPrimaryDark">#292929</color>
-    <color name="colorAccent">#4AD9D9</color>
+    <color name="colorAccent">#4ad9d9</color>
     <color name="colorPurple">#757AD1</color>
     <color name="colorRed">#F2385A</color>
     <color name="colorOrange">#F5A503</color>
-    <color name="colorTeal">#4AD9D9</color>
+    <color name="colorTeal">#4ad9d9</color>
 </resources>
