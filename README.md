@@ -5,11 +5,15 @@ Application will allow you to add restaurant receipts and split the items by cos
 
 Note that the application is still in development.
 
+**None Working Application At the moment!** 
+
 ## Getting Started
-To get this application running.
 
 Software Required:
-[Android Studio 3.0.1](https://developer.android.com/studio/index.html)
+
+- [Android Studio 3.0.1](https://developer.android.com/studio/index.html)
+- Android Device/Virtual Device with Google Play Services
+
 
 1. Clone this repository to your local machine.
 ```
@@ -22,8 +26,7 @@ $ git clone https://github.com/thebyronc/AndroidBillSplitter
 
 5. Once Virtual Device is running, click **Run App**. ![Run App](images/rm_3.png)
 
-6. App will run on **Virtual Device**
-
+6. App will run on **Virtual Device**''
 ## Current Status
 This is still a work in progress. See Application Dev Plan
 

@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import foiled.androidbillsplitter.Constants;
 import foiled.androidbillsplitter.R;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -42,6 +44,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+
     @BindView(R.id.homeButton) Button mHomeButton;
     @BindView(R.id.peopleButton) Button mPeopleButton;
     @BindView(R.id.billButton) Button mBillButton;
@@ -61,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bills.add("McDonalds");
         bills.add("Blue Star Donuts");
 
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
         mPeopleButton.setOnClickListener(this);
         mBillButton.setOnClickListener(this);
         mAddBillButton.setOnClickListener(this);
@@ -78,7 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (view == mAddBillButton) {
             String newBill = mAddBillEditText.getText().toString();
-            bills.add(newBill);
+//            bills.add(newBill);
+            addToSharedPreferences(newBill);
             Toast.makeText(MainActivity.this, newBill + " added.", Toast.LENGTH_LONG).show();
             mAddBillEditText.setText("");
         }
@@ -98,6 +107,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void addToSharedPreferences(String newBill) {
+        mEditor.putString(Constants.PREFERENCES_BILL, newBill).apply();
     }
 
     private void logout() {
