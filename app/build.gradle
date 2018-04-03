@@ -39,6 +39,9 @@ android {
             includeAndroidResources = true
         }
     }
+    buildTypes.each {
+        it.buildConfigField 'String', 'YELP_TOKEN', YelpToken
+    }
 }
 
 dependencies {
