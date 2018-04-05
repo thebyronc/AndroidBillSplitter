@@ -9,10 +9,9 @@ public class Item {
     private Double cost;
     private People people;
 
-    public Item(String name, Double cost, People people) {
+    public Item(String name, Double cost) {
         this.name = name;
         this.cost = cost;
-        this.people = people;
     }
 
     public String getName() {

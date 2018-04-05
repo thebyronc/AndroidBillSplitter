@@ -2,18 +2,17 @@ package foiled.androidbillsplitter.models;
 
 import java.util.ArrayList;
 
-/**
- * Created by Guest on 3/29/18.
- */
 
 public class Bill {
     private String name;
     private Double total;
-    private ArrayList<Item> items;
+    private ArrayList<Item> items = new ArrayList<>();
+    private String pushId;
 
     public Bill(String name) {
         this.name = name;
         this.total = calcTotal();
+        items.add(new Item("Item", 0.00));
     }
 
     private Double calcTotal() {
@@ -42,5 +41,12 @@ public class Bill {
 
     public void setItems(ArrayList<Item> items) {
         this.items = items;
+    }
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }

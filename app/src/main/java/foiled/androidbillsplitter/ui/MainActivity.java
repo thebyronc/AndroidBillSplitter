@@ -37,13 +37,28 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import foiled.androidbillsplitter.Constants;
 import foiled.androidbillsplitter.R;
+import foiled.androidbillsplitter.models.Bill;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private DatabaseReference mBillFireBase;
+    private ValueEventListener mBillFireBaseListener;
+    private FirebaseRecyclerAdapter mFirebaseAdapter;
+    private Query billQuery;
+
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
 
@@ -60,6 +75,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        mBillFireBase = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_BILL)
+                .child(uid);
+
+        mBillFireBaseListener = mBillFireBase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot billSnapshot : dataSnapshot.getChildren()) {
+                    String bill = billSnapshot.getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        billQuery = mBillFireBase.getRef();
 
         bills.add("Luk Lac");
         bills.add("Shotun Sushi");
@@ -85,10 +123,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         if (view == mAddBillButton) {
-            String newBill = mAddBillEditText.getText().toString();
-//            bills.add(newBill);
-            addToSharedPreferences(newBill);
-            Toast.makeText(MainActivity.this, newBill + " added.", Toast.LENGTH_LONG).show();
+            String billName = mAddBillEditText.getText().toString();
+            Bill bill = new Bill(billName);
+            saveBillToFirebase(bill);
+            addToSharedPreferences(billName);
+            Toast.makeText(MainActivity.this, bill.getName() + " added.", Toast.LENGTH_LONG).show();
             mAddBillEditText.setText("");
         }
     }
@@ -107,6 +146,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveBillToFirebase(Bill bill) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        DatabaseReference pushRef = mBillFireBase.push();
+        String pushId = pushRef.getKey();
+        bill.setPushId(pushId);
+        pushRef.setValue(bill);
     }
 
     private void addToSharedPreferences(String newBill) {

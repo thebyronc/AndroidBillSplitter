@@ -18,12 +18,26 @@ import butterknife.ButterKnife;
 import foiled.androidbillsplitter.Constants;
 import foiled.androidbillsplitter.adapter.BillArrayAdapter;
 import foiled.androidbillsplitter.R;
+import foiled.androidbillsplitter.models.Bill;
 
 import android.graphics.Typeface;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 public class BillActivity extends Activity {
+    private DatabaseReference mBillFireBase;
+    private ValueEventListener mBillFireBaseListener;
+    private FirebaseRecyclerAdapter mFirebaseAdapter;
+    private Query billQuery;
+
     @BindView(R.id.billTitleTextView) TextView mBillTitleTextView;
     @BindView(R.id.billListView) ListView mBillListView;
+
+    public ArrayList<Bill> bills = new ArrayList<>();
+    private BillArrayAdapter mAdapter;
 
     private SharedPreferences mSharedPreferences;
     private String mBillFromSharedPreferences;
