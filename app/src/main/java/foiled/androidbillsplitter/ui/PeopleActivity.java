@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,15 +31,18 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import foiled.androidbillsplitter.Constants;
+import foiled.androidbillsplitter.adapter.FirebasePeopleListAdapter;
 import foiled.androidbillsplitter.adapter.FirebasePeopleViewHolder;
 import foiled.androidbillsplitter.adapter.PeopleArrayAdapter;
 import foiled.androidbillsplitter.R;
 import foiled.androidbillsplitter.models.People;
+import foiled.androidbillsplitter.util.OnStartDragListener;
 
-public class PeopleActivity extends AppCompatActivity implements View.OnClickListener {
+public class PeopleActivity extends AppCompatActivity implements View.OnClickListener, OnStartDragListener {
     private DatabaseReference mPeopleFireBase;
     private ValueEventListener mPeopleFireBaseListener;
-    private FirebaseRecyclerAdapter mFirebaseAdapter;
+    private FirebasePeopleListAdapter mFirebaseAdapter;
+    private ItemTouchHelper mItemTouchHelper;
     private Query peopleQuery;
 
     @BindView(R.id.peopleEditText) TextView mPeopleEditText;
@@ -97,7 +101,6 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
 
         mAddPeopleButton.setOnClickListener(this);
         setUpFirebaseAdapter();
-//        getPeople();
 
     }
     @Override
@@ -123,13 +126,6 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
         pushRef.setValue(people);
     }
 
-    private void getPeople() {
-        mAdapter = new PeopleArrayAdapter(getApplicationContext(), peoples);
-        mRecyclerView.setAdapter(mAdapter);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PeopleActivity.this);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setHasFixedSize(true);
-    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -138,15 +134,37 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPeopleFireBase.removeEventListener(mPeopleFireBaseListener);
+        mFirebaseAdapter.setIndexInFirebase();
+        mFirebaseAdapter.stopListening();
+//        mPeopleFireBase.removeEventListener(mPeopleFireBaseListener);
     }
+
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
+    }
+
     private void setUpFirebaseAdapter() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        mPeopleFireBase = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_PEOPLE)
+                .child(uid);
+
+//        peopleQuery = mPeopleFireBase.getRef().orderByChild(Constants.FIREBASE_QUERY_INDEX);
+        peopleQuery = FirebaseDatabase.getInstance()
+                .getReference(Constants.FIREBASE_CHILD_PEOPLE)
+                .child(uid)
+                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
+
         FirebaseRecyclerOptions options =
                 new FirebaseRecyclerOptions.Builder<People>()
                         .setQuery(peopleQuery, People.class)
                         .build();
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<People, FirebasePeopleViewHolder>
-                (options) {
+
+        mFirebaseAdapter = new FirebasePeopleListAdapter(options, peopleQuery, this, this) {
             @Override
             public FirebasePeopleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())

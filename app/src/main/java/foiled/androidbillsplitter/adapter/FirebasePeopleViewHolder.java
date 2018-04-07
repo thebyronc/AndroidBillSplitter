@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +24,7 @@ import foiled.androidbillsplitter.models.People;
 
 public class FirebasePeopleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
     private ArrayList<People> peoples = new ArrayList<>();
+    public ImageView mMovieImageView;
     View mView;
     Context mContext;
 
@@ -35,9 +37,11 @@ public class FirebasePeopleViewHolder extends RecyclerView.ViewHolder implements
     public void bindPeople(People people) {
         TextView mPeopleNameTextView = (TextView) mView.findViewById(R.id.peopleNameTextView);
         TextView mEmailTextView = (TextView) mView.findViewById(R.id.emailTextView);
+        mMovieImageView = (ImageView) mView.findViewById(R.id.movieImageView);
 
         mPeopleNameTextView.setText(people.getName());
         mEmailTextView.setText(people.getEmail());
+
     }
     @Override
     public void onClick(View view) {
@@ -65,9 +69,6 @@ public class FirebasePeopleViewHolder extends RecyclerView.ViewHolder implements
 
             }
         });
-
-
-
     }
 
 }

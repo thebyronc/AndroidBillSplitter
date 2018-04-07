@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import foiled.androidbillsplitter.R;
 import foiled.androidbillsplitter.models.People;
+import foiled.androidbillsplitter.util.OnPeopleSelectedListener;
 
 
 /**
@@ -26,16 +27,18 @@ import foiled.androidbillsplitter.models.People;
 public class PeopleArrayAdapter extends RecyclerView.Adapter<PeopleArrayAdapter.PeopleViewHolder> {
     private Context mContext;
     private ArrayList<People> mPeoples = new ArrayList<>();
+    private OnPeopleSelectedListener mOnPeopleSelectedListener;
 
-    public PeopleArrayAdapter(Context context, ArrayList<People> peoples) {
+    public PeopleArrayAdapter(Context context, ArrayList<People> peoples, OnPeopleSelectedListener peopleSelectedListener) {
         mContext = context;
         mPeoples = peoples;
+        mOnPeopleSelectedListener = peopleSelectedListener;
     }
 
     @Override
     public PeopleArrayAdapter.PeopleViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.people_list_item, parent, false);
-        PeopleViewHolder viewHolder = new PeopleViewHolder(view);
+        PeopleViewHolder viewHolder = new PeopleViewHolder(view, mPeoples, mOnPeopleSelectedListener);
         return viewHolder;
     }
 
@@ -66,10 +69,12 @@ public class PeopleArrayAdapter extends RecyclerView.Adapter<PeopleArrayAdapter.
 
         }
 
-        public PeopleViewHolder(View itemView) {
+        public PeopleViewHolder(View itemView, ArrayList<People> peoples, OnPeopleSelectedListener peopleSelectedListener ) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            mPeoples = peoples;
+            mOnPeopleSelectedListener = peopleSelectedListener;
             itemView.setOnClickListener(this);
         }
 
