@@ -36,7 +36,9 @@ import foiled.androidbillsplitter.adapter.FirebasePeopleViewHolder;
 import foiled.androidbillsplitter.adapter.PeopleArrayAdapter;
 import foiled.androidbillsplitter.R;
 import foiled.androidbillsplitter.models.People;
+import foiled.androidbillsplitter.util.ItemTouchHelperAdapter;
 import foiled.androidbillsplitter.util.OnStartDragListener;
+import foiled.androidbillsplitter.util.SimpleItemTouchHelperCallback;
 
 public class PeopleActivity extends AppCompatActivity implements View.OnClickListener, OnStartDragListener {
     private DatabaseReference mPeopleFireBase;
@@ -153,7 +155,7 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
                 .getReference(Constants.FIREBASE_CHILD_PEOPLE)
                 .child(uid);
 
-//        peopleQuery = mPeopleFireBase.getRef().orderByChild(Constants.FIREBASE_QUERY_INDEX);
+        peopleQuery = mPeopleFireBase.getRef().orderByChild(Constants.FIREBASE_QUERY_INDEX);
         peopleQuery = FirebaseDatabase.getInstance()
                 .getReference(Constants.FIREBASE_CHILD_PEOPLE)
                 .child(uid)
@@ -177,10 +179,23 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
                 holder.bindPeople(model);
             }
         };
+
+        mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                mFirebaseAdapter.notifyDataSetChanged();
+            }
+        });
+
+
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
 
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback((ItemTouchHelperAdapter) mFirebaseAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
 

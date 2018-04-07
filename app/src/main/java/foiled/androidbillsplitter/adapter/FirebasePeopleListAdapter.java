@@ -72,9 +72,6 @@ public class FirebasePeopleListAdapter extends FirebaseRecyclerAdapter<People, F
     protected void onBindViewHolder(final FirebasePeopleViewHolder holder, int position, People model) {
         holder.bindPeople(model);
         mOrientation = holder.itemView.getResources().getConfiguration().orientation;
-
-
-
     }
 
     @Override
