@@ -5,8 +5,6 @@ Application will allow you to add restaurant receipts and split the items by cos
 
 Note that the application is still in development.
 
-**None Working Application At the moment!** 
-
 ## Getting Started
 
 Software Required:
@@ -38,11 +36,11 @@ This is still a work in progress. See Application Dev Plan
 
 #### Application Dev Plan
 - [x] Create Baseline objects and routers.
-- [ ] Connect to Firebase for initial data creation and storage
+- [x] Connect to Firebase for initial data creation and storage
 - [ ] Implement OAuth2
-- [ ] Connect individual sign-ins with Google Sheets
-- [ ] Store parsed data into google sheets so the user can easily see and modify cost information.
-- [ ] Re-pull from google sheets to get updated data.
+- [x] Connect individual sign-ins with Google Sheets
+- [x] Store parsed data into google sheets so the user can easily see and modify cost information.
+- [x] Re-pull from google sheets to get updated data.
 - [ ] Possibly implement REACT Native to publish to Android and IOS
 - [ ] Use Expo.io
 
