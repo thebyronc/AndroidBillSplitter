@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class BillArrayAdapter extends ArrayAdapter {
     private Context mContext;
     private ArrayList<String> mBills;
+    private int mOrientation;
 
     public BillArrayAdapter(Context mContext, int resource, ArrayList<String> mBills) {
         super(mContext, resource);

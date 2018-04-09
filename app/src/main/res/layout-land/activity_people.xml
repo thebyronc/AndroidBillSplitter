@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/peopleTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="People"
+            android:textSize="30sp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <EditText
+            android:id="@+id/peopleEditText"
+            android:layout_width="248dp"
+            android:layout_height="46dp"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="73dp" />
+
+        <TextView
+            android:id="@+id/addPeopleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add New People"
+            app:layout_constraintBottom_toTopOf="@+id/peopleEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="41dp" />
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="248dp"
+            android:layout_height="46dp"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="132dp" />
+
+        <Button
+            android:id="@+id/addPeopleButton"
+            android:layout_width="220dp"
+            android:layout_height="47dp"
+            android:text="ADD"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="197dp" />
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="41dp" />
+
+
+</LinearLayout>
