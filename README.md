@@ -18,13 +18,21 @@ Software Required:
 $ git clone https://github.com/thebyronc/AndroidBillSplitter
 ```
 2. Open project *AndroidBillSplitter* with **Android Studio**
-3. Click on **AVD Manager** in **Android Studio** ![AVD Manager](images/rm_1.png)
 
-4. Run a Virtual Device with an **API** of **24** or higher. ![Run Virtual Device](images/rm_2.png)
+3. Create a file named gradle.properties with the text below. Replace "Yelp_API_KEY" with your Yelp API Key.
+```
+YelpToken = "Bearer Yelp_API_Key"
+org.gradle.jvmargs=-Xmx1536m
+```
 
-5. Once Virtual Device is running, click **Run App**. ![Run App](images/rm_3.png)
+4. Click on **AVD Manager** in **Android Studio** ![AVD Manager](images/rm_1.png)
 
-6. App will run on **Virtual Device**''
+5. Run a Virtual Device with an **API** of **24** or higher. ![Run Virtual Device](images/rm_2.png)
+
+6. Once Virtual Device is running, click **Run App**. ![Run App](images/rm_3.png)
+
+7. App will run on **Virtual Device**
+
 ## Current Status
 This is still a work in progress. See Application Dev Plan
 
